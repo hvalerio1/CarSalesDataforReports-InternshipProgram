@@ -1,0 +1,35 @@
+Create a query that returns the top 3 car brands most sold (i.e., having the most car brand sales) during first
+and third quarter of year 2015.
+
+SELECT  TOP 3  
+	V.model
+	, SUM((ID.Quanyity * IL.SalesPrice) - I.TotalDiscount) AS  TotalSales
+FROM Vehicle as V
+	INNER JOIN InvoiceLine as IL
+		ON  V.ID = IL.ID
+	INNER JOIN Invoice as I
+		ON  I.ID = IL.ID
+WHERE YEAR(I.InvoiceDate) = 2015 
+	AND MONTH(I.InvoiceDate) <= 9 
+GRORP BY SUM((ID.Quanyity * IL.SalesPrice) - I.TotalDiscount) 
+
+
+
+Create a query that shows the top 3 most sold car colors (i.e., having the most car color sales) for each
+quarter for the years 2012,2013,2014,2015.
+
+
+SELECT  TOP 3  
+	C.ColorDes
+	, SUM((ID.Quanyity * IL.SalesPrice) - I.TotalDiscount) AS  TotalSales
+FROM Vehicle as V
+	INNER JOIN InvoiceLine as IL
+		ON  V.ID = IL.vehicleID
+	INNER JOIN Invoice as I
+		ON  I.ID = invoiceIL.ID
+	INNER JOIN Color as C
+		ON  C.ID = V.colorID
+WHERE YEAR(I.InvoiceDate) IN (2012, 2013, 2014, 2015) 
+GRORP BY SUM((ID.Quanyity * IL.SalesPrice) - I.TotalDiscount) 
+
+
